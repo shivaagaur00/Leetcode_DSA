@@ -1,33 +1,28 @@
 class Solution {
     public String largestPalindromic(String num) {
         int[] arr=new int[10];
+        String s="";
+        List<Integer> list=new ArrayList<>();
         for(char c:num.toCharArray()){
             arr[Character.getNumericValue(c)]++;
         }
-        int odd=10;
+        int odd;
         for(int i=9;i>=0;i--){
             if(arr[i]%2!=0){
                 odd=i;
+                s+=odd;
+                arr[odd]--;
                 break;
             }
-        }
-        String s="";
-        List<Integer> list=new ArrayList<>();
-        if(odd<10){
-            s+=odd;
-            arr[odd]--;
         }
         for(int i=0;i<10;i++){
             if(arr[i]%2!=0) arr[i]--;
             if(arr[i]>0){
-                list.add(i);
                 arr[i]/=2;
-            }
-        }
-        for(int a:list){
-            while(arr[a]>0){
-                s=a+s+a;
-                arr[a]--;
+                while(arr[i]>0){
+                s=i+s+i;
+                arr[i]--;
+                }
             }
         }
         while(s.length()>0 && s.charAt(0)=='0'){
