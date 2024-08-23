@@ -60,11 +60,13 @@ class Solution {
         return ""+num+"/"+deno;
     }
     public int gcd(int a, int b) {
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return a;
+    int result = Math.min(a, b);
+        while (result > 0) {
+            if (a % result == 0 && b % result == 0) {
+                break;
+            }
+            result--;
+        }
+    return result;
 }
 }
