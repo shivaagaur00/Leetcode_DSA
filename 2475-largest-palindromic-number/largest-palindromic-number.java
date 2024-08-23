@@ -17,24 +17,13 @@ class Solution {
             s+=odd;
             arr[odd]--;
         }
-        if(arr[0]>1){
-            if(arr[0]%2!=0) arr[0]--;
-            arr[0]/=2;
-            list.add(0);
-        }
-        for(int i=1;i<10;i++){
+        for(int i=0;i<10;i++){
             if(arr[i]%2!=0) arr[i]--;
             if(arr[i]>0){
                 list.add(i);
                 arr[i]/=2;
             }
         }
-        // if(list.size()>1 && list.get(0)=0){
-        //     while(arr[0]>0){
-        //         s+=0;
-        //     }
-        // }
-        // else if(list.size()==1 && list.get(0)==0) list.remove(0)
         for(int a:list){
             while(arr[a]>0){
                 s=a+s+a;
