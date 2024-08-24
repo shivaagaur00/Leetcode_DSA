@@ -24,11 +24,9 @@ class Solution {
     public void func(TreeNode root,String s){
         if(root.left==null && root.right==null){
             s+=ch[root.val];
-            String st="";
-            for(int i=s.length()-1;i>=0;i--){
-                st+=s.charAt(i);
-            }
-            arr.add(st);
+            StringBuilder st=new StringBuilder(s);
+            s=st.reverse().toString();
+            arr.add(s);
             return;
         }
         if(root.left!=null) func(root.left,s+ch[root.val]);
