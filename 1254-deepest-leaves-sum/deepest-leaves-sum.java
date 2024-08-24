@@ -17,22 +17,20 @@ class Solution {
     int max=0;
     public int deepestLeavesSum(TreeNode root) {
         int len=leng(root);
-        int ans=func(root,len,root.val);
+        func(root,len,root.val);
         return max/2;
     }
     public int leng(TreeNode root){
         if(root==null) return 0;
-        int a=leng(root.left);
-        int b=leng(root.right);
-        return Math.max(a,b)+1;
+        return Math.max(leng(root.left),leng(root.right))+1;
     }
-    public int func(TreeNode root,int len,int sum){
+    public void func(TreeNode root,int len,int sum){
         if(root==null && len==0){
             max+=sum;
+            return;
         }
-        if(root==null) return 0;
-        int a=func(root.left,len-1,root.val);
-        int b=func(root.right,len-1,root.val);
-        return 0;
+        if(root==null) return ;
+        func(root.left,len-1,root.val);
+        func(root.right,len-1,root.val);
     }
 }
