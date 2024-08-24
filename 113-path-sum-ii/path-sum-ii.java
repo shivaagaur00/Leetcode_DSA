@@ -16,26 +16,21 @@
 class Solution {
     List<String> arr=new ArrayList<>();
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        func(root,targetSum,"");
-        List<List<Integer>> ans=new ArrayList<>();
-        for(String st:arr){
-            String[] array=st.split(" ");
-            List<Integer> lis=new ArrayList<>();
-            for(String t:array){
-                lis.add(Integer.parseInt(t));
-            }
-            ans.add(lis);
-        }
-        return ans;
+        List<List<Integer>> list=new ArrayList<>();
+        List<Integer> lis=new ArrayList<>();
+        func(root,targetSum,lis,list);
+        return list;
     }
-    public void func(TreeNode root,int tar,String s){
+    public void func(TreeNode root,int tar,List<Integer>li,List<List<Integer>> list){
         if(root==null) return;
-        if(root.left==null && root.right==null && tar-root.val==0){
-            arr.add(s+root.val+" ");
+        li.add(root.val);
+        if(root.left==null && root.right==null && (tar-root.val)==0){
+            list.add(new ArrayList<>(li));
+            li.remove(li.size() - 1);
             return;
         }
-        func(root.left,tar-root.val,s+root.val+" ");
-        func(root.right,tar-root.val,s+root.val+" ");
-        return;
+        func(root.left,tar-root.val,li,list);
+        func(root.right,tar-root.val,li,list);
+        li.remove(li.size()-1);
     }
 }
