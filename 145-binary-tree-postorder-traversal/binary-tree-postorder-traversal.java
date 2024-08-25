@@ -16,13 +16,16 @@
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> arr=new ArrayList<>();
-        func(root,arr);
+        if(root==null) return arr;
+        Stack<TreeNode> stack=new Stack<>();
+        stack.add(root);
+        while(!stack.isEmpty()){
+            TreeNode temp=stack.pop();
+            arr.add(temp.val);
+            if(temp.left!=null) stack.add(temp.left);
+            if(temp.right!=null) stack.add(temp.right);
+        }
+        Collections.reverse(arr);
         return arr;
-    }
-    public void func(TreeNode root,List<Integer> arr){
-        if(root==null) return;
-        func(root.left,arr);
-        func(root.right,arr);
-        arr.add(root.val);
     }
 }
