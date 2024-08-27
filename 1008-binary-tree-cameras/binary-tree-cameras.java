@@ -15,6 +15,9 @@
  */
 class Solution {
     int ans=0;
+    // 1 no need done
+    // 2 need 
+    // 3 required
     public int minCameraCover(TreeNode root) {
        int a=func(root);
        if(a==3) ans++;
