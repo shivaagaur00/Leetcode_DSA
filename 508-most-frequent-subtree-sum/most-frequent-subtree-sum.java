@@ -15,11 +15,10 @@
  */
 class Solution {
     Map<Integer,Integer> map=new HashMap<>();
-    Map<Integer,Integer> tr=new HashMap<>();
     public int[] findFrequentTreeSum(TreeNode root) {
+        if(root.left==null && root.right==null) return new int[]{root.val};
         func(root,0);
         int max=Integer.MIN_VALUE;
-        int element=root.val;
         for(int key:map.keySet()){
             max=Math.max(max,map.get(key));
         }
@@ -40,7 +39,6 @@ class Solution {
         int b=func(root.right,sum);
         int total=a+b+root.val;
         map.put(total,map.getOrDefault(total,0)+1);
-        tr.put(total,root.val);
         return total;
     }
 }
