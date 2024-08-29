@@ -28,7 +28,6 @@ class Solution {
             }
         }
         TreeNode node=new TreeNode(max);
-        System.out.println(max);
         node.left=func(nums,i,k-1);
         node.right=func(nums,k+1,j);
         return node;
