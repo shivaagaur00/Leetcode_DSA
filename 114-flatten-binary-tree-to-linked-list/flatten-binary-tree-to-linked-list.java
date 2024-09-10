@@ -20,7 +20,7 @@ class Solution {
         ans(root);
     TreeNode dummy=root;
     for(int i=1;i<arr.size();i++){
-        root.left=null;
+        dummy.left=null;
         dummy.right=new TreeNode(arr.get(i));
         dummy=dummy.right;
     }
