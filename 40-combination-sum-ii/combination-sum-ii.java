@@ -14,7 +14,7 @@ class Solution {
         if(sum>target) return;
         for(int j=i;j<candidates.length;j++){
             if(j>i && candidates[j]==candidates[j-1]) continue;
-            if(sum>target) break;
+            // if(sum>target) break;
             list.add(candidates[j]);
             func(arr,list,j+1,sum+candidates[j],target,candidates);
             list.remove(list.size()-1);
