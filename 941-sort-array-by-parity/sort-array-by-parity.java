@@ -1,14 +1,14 @@
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
-        List<Integer> even=new ArrayList<>();
-        List<Integer> odd=new ArrayList<>();
-        for(int a:nums){
-            if(a%2==0) even.add(a);
-            else odd.add(a);
-        }
-        for(int j=0;j<even.size();j++) nums[j]=even.get(j);
         int i=0;
-        for(int j=even.size();j<nums.length;j++) nums[j]=odd.get(i++);
+        int j=nums.length-1;
+        while(i<j){
+            while(i<j && nums[i]%2==0) i++;
+        while(i<j && nums[j]%2!=0) j--;
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+        }
         return nums;
     }
 }
