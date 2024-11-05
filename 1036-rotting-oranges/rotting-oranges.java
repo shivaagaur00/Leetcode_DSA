@@ -25,7 +25,6 @@ class Solution {
                         visited[r + i[0]][c + i[1]] = true;
                         grid[r + i[0]][c + i[1]] = 2;
                         isrot=true;
-                        System.out.println(r+i[0]+" "+(c+i[1]));
                 } 
             }
         }
