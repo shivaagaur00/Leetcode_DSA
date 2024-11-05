@@ -9,7 +9,6 @@ class Solution {
                     q.add(new pair(i,j));
                     visited[i][j]=true;
                 }
-
             }
         }
         int[][] direction = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
@@ -41,28 +40,6 @@ class Solution {
         return ans;
     }
 }
-// class Solution {
-//     public int orangesRotting(int[][] grid) {
-//         int ans = 0;
-//         boolean visited[][] = new boolean[grid.length][grid[0].length];
-//         for (int i = 0; i < grid.length; i++) {
-//             for (int j = 0; j < grid[0].length; j++) {
-//                 if (grid[i][j] == 2 && !visited[i][j]) {
-//                     int check[] = new int[1];
-//                     bfs(i, j, visited, grid, check);
-//                     ans = Math.max(ans, check[0]);
-//                 }
-//             }
-//         }
-//         for (int i = 0; i < grid.length; i++) {
-//             for (int j = 0; j < grid[0].length; j++) {
-//                 if (grid[i][j] == 1)
-//                     return -1;
-//             }
-//         }
-//         return ans;
-//     }
-
     class pair {
         int first;
         int second;
@@ -72,29 +49,3 @@ class Solution {
             this.second = second;
         }
     }
-
-//     public void bfs(int row, int col, boolean[][] visited, int[][] grid, int[] check) {
-//         visited[row][col] = true;
-//         Queue<pair> q = new LinkedList<>();
-//         q.add(new pair(row, col));
-//         int[][] direction = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-//         while (!q.isEmpty()) {
-//             int n = q.size();
-//             boolean isrot=false;
-//             while (n-- > 0) {
-//                 pair temp = q.poll();
-//                 int r = temp.first;
-//                 int c = temp.second;
-//                 for (int[] i : direction) {
-//                     if (r + i[0] < grid.length && r + i[0] >= 0 && c + i[1] < grid[0].length && c + i[1] >= 0 && !visited[r + i[0]][c + i[1]] && grid[r + i[0]][c + i[1]] == 1) {
-//                         q.add(new pair(r+i[0],c+i[1]));
-//                         visited[r + i[0]][c + i[1]] = true;
-//                         grid[r + i[0]][c + i[1]] = 2;
-//                         isrot=true;
-//                     }
-//                 }
-//             }
-//             if(isrot) check[0]++;
-//         }
-//     }
-// }
