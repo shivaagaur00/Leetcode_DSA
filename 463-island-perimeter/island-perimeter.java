@@ -12,7 +12,6 @@ class Solution {
             if(grid[0][i]==1) ans++;
             if(grid[n-1][i]==1) ans++;
         }
-        System.out.println(ans);
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j]==1){
