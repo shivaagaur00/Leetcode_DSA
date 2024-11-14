@@ -12,9 +12,7 @@ class Solution {
                 stack.push(a+b);
             }
             else stack.push(Integer.parseInt(st));
-                    System.out.println(stack);
         }
-        System.out.println(stack);
         int ans=0;
         while(!stack.isEmpty()){
             ans+=stack.pop();
