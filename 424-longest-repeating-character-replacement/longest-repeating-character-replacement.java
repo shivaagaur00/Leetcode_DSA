@@ -48,9 +48,7 @@ class Solution {
                 }
                 id++;
             }
-            // id--;
             res=id;
-            // System.out.println(res);
             int prev=ls.get(0);
             for(;id<n;id++){
                 if(arr[id]!=c){
@@ -63,7 +61,6 @@ class Solution {
                     res=Math.max(res,id-prev+1);
                 }
             }
-            // System.out.println(c+" "+res);
             return res;
         }
     }
