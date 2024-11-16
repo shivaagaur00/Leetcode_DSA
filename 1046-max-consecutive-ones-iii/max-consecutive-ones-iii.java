@@ -1,16 +1,6 @@
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        int i = 0;
-        List<Integer> arr = new ArrayList<>();
-        int temp = k;
         int n = nums.length;
-        while (temp > 0 && i < n) {
-            if (nums[i] == 0) {
-                temp--;
-                arr.add(i);
-            }
-            i++;
-        }
         int zero = 0;
         int ans = 0;
         for (int j = 0; j < n - 1; j++) {
@@ -27,23 +17,24 @@ class Solution {
             } else
                 zero++;
         }
-        int max = i;
-        if (nums[n - 1] == 0)
-            zero++;
-        int prev;
-        if (zero == k) {
-            return n;
+        if (nums[n - 1] == 0) zero++;
+        if (k == 0) return ans;
+        if (zero <= k) return n;
+        int i = 0;
+        int temp = k;
+        List<Integer> arr = new ArrayList<>();
+        while (temp > 0 && i < n) {
+            if (nums[i] == 0) {
+                temp--;
+                arr.add(i);
+            }
+            i++;
         }
+        int max = i;
+        int prev;
         if (arr.size() > 0 && arr.size() == k)
             prev = arr.get(0);
-        else {
-            if (k == 0)
-                return ans;
-            if (zero < k)
-                return n;
-            else
-                return 0;
-        }
+        else return 0;
         for (; i < n; i++) {
             if (nums[i] == 0 && arr.size() == k) {
                 prev = arr.get(0) + 1;
