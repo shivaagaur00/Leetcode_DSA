@@ -1,51 +1,38 @@
 class Solution {
-    public boolean canFinish(int n, int[][] arr) {
-        Map<Integer,List<Integer>> map=new HashMap<>();
-        for(int i=0;i<n;i++){
-            map.put(i,new ArrayList<>());
+    public boolean canFinish(int n, int[][] p) {
+        int indeg[] = new int[n];
+        List<List<Integer>> graph = new ArrayList<>();
+         
+        for (int i=0; i<n; i++) graph.add(new ArrayList<>());
+        
+        for (int el[] : p) {
+            int a = el[0];
+            int b = el[1];
+            graph.get(b).add(a);
+            indeg[a]++;
         }
-        // int[] vis=new boolean[n];
-        // boolean flag=false;
-        for(int i=0;i<arr.length;i++){
-            map.get(arr[i][0]).add(arr[i][1]);
-        }
-        int[] visited = new int[n];
-        boolean hasCycle = false;
-
-        for (int i = 0; i < n; i++) {
-            if (visited[i] == 0) {
-                if (dfs(i, map, visited)) {
-                    hasCycle = true;
-                    break;
-                }
-            }
-        }
-
-        if (hasCycle) {
-            return false;
-        } 
-        return true;
+        
+        return topSort(graph, indeg); 
     }
 
-    public boolean dfs(int course, Map<Integer, List<Integer>> graph, int[] visited) {
-        visited[course] = 1; 
-        for (int nextCourse : graph.get(course)) {
-            if (visited[nextCourse] == 1) {
-                return true; 
-            }
-            if (visited[nextCourse] == 0 && dfs(nextCourse, graph, visited)) {
-                return true; 
+    private boolean topSort(List<List<Integer>> graph, int indeg[]) {
+        Queue<Integer> q = new LinkedList<>();
+        int index = 0;
+        
+        for (int i=0; i<indeg.length; i++) {
+            if (indeg[i] == 0) q.add(i);
+        }
+    
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            index++;
+            
+            for (int neighbor : graph.get(curr)) {
+                indeg[neighbor]--;
+                if (indeg[neighbor] == 0) q.add(neighbor);
             }
         }
-        visited[course] = 2;
-        return false;
-    }
-}
-class pair{
-    int a;
-    int b;
-    pair(int a,int b){
-        this.a=a;
-        this.b=b;
+        
+        return index == indeg.length;
     }
 }
