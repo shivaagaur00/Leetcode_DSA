@@ -1,18 +1,20 @@
 class Solution {
-    public int change(int amount, int[] coins){
-        int[][] dp=new int[coins.length][amount+1]; 
-        for(int[] a:dp) Arrays.fill(a,-1);
-        return func(coins,amount,0,dp);
-    }
-    public int func(int[] arr,int amount,int idx,int[][]dp){
-        if(amount==0) return 1;
-        if(amount<0) return 0;
-        if(idx==arr.length) return 0;
-        if(dp[idx][amount]!=-1) return dp[idx][amount];
-        int res=0;
-        for(int i=idx;i<arr.length;i++){
-            res+=func(arr,amount-arr[i],i,dp);
+    public int change(int amount, int[] coins) {
+        int [][]dp= new int[coins.length+1][amount+1];
+        for(int i=0;i<dp.length;i++){
+            dp[i][0]=1;
         }
-        return dp[idx][amount]=res;
+        for(int c=1;c<dp.length;c++){
+            for(int amt=1;amt<=amount;amt++){
+                int inc =0;
+                int exc=0;
+                if(amt>=coins[c-1]){
+                    inc= dp[c][amt-coins[c-1]];
+                }
+                exc = dp[c-1][amt];
+                dp[c][amt]=exc+inc;
+            }
+        }
+        return dp[dp.length-1][dp[0].length-1];
     }
 }
