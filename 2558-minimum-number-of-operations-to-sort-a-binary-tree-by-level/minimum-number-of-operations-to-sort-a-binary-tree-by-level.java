@@ -33,34 +33,6 @@ class Solution {
         }
     return ans;
     }
-    // public int minNoOperations(List<Integer> list){
-    //     int cnt=0;
-    //     List<Integer> listSort=new ArrayList();
-    //     Map<Integer, Integer> map=new HashMap();
-
-    //     //Storing Hash(key, value) for list-value and list-index
-    //     for(int i=0; i<list.size(); i++){
-    //         map.put(list.get(i), i);
-    //     }
-
-    //     listSort.addAll(list);
-    //     Collections.sort(listSort); //Having sorted list into variable "listSort"
-
-    //     //Comparing "list" with "sortedList" and swapping with help of "map"
-    //     for(int i=0; i<list.size(); i++){
-    //         if(list.get(i)!=listSort.get(i)){
-    //             int idxS=i;
-    //             int idxT=map.get(listSort.get(i));
-
-    //             Collections.swap(list, idxS, idxT); //Swapping the values between idxS and idxT
-    //             map.put(list.get(idxS), idxS); //Updating "map" value for idxS
-    //             map.put(list.get(idxT), idxT); //Updating "map" value for idxT
-
-    //             cnt++;
-    //         }
-    //     }       
-    //     return cnt;
-    // }
     public int func(List<Integer> arr){
         int count=0;
         List<Integer> sortedArr=new ArrayList<>(arr);
