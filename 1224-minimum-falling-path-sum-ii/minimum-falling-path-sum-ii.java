@@ -1,35 +1,25 @@
 class Solution {
-    public int minFallingPathSum(int[][] grid) {
-        int n=grid.length;
-        int m=grid[0].length;
+    public int minFallingPathSum(int[][] arr) {
+        int n=arr.length;
+        int m=arr[0].length;
         int[][] dp=new int[n][m];
-        for(int a[]:dp){
-            Arrays.fill(a,-1);
-        }
         for(int i=0;i<m;i++){
-            int a=func(dp,grid,n-1,i);
+            dp[0][i]=arr[0][i];
         }
+        for(int i=1;i<n;i++){
+            for(int j=0;j<m;j++){
+                int min=Integer.MAX_VALUE;
+                for(int k=0;k<m;k++){
+                    if(k!=j) min=Math.min(arr[i][j]+dp[i-1][k],min);
+                }
+                dp[i][j]=min;
+            }
+        }
+        int ans=Integer.MAX_VALUE;
+        for(int i=0;i<m;i++){
+            ans=Math.min(ans,dp[n-1][i]);
+        }
+        return ans;
+    }
 
-        int min=Integer.MAX_VALUE;
-        for(int i=0;i<m;i++){
-            min=Math.min(min,dp[n-1][i]);
-        }
-        return min;
-    }
-    public int func(int[][] dp,int[][] arr,int i,int j){
-        int n=dp.length;
-        int m=dp[0].length;
-        if(j<0 || j>=m) return Integer.MAX_VALUE;;
-        if(i==0) {
-            dp[i][j]=arr[i][j];
-            return arr[i][j];
-        }
-        if(dp[i][j]!=-1) return dp[i][j];
-        int min=Integer.MAX_VALUE;
-        for(int k=0;k<m;k++){
-            if(k!=j) min=Math.min(min,func(dp,arr,i-1,k));
-        }
-        dp[i][j]=arr[i][j]+min;
-        return dp[i][j];
-    }
 }
