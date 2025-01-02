@@ -1,20 +1,23 @@
 class Solution {
     public boolean canReach(String s, int minJump, int maxJump) {
         int n=s.length();
-        boolean[] dp=new boolean[n];
-        dp[0]=true;
+        if(s.charAt(s.length()-1)=='1') return false;
+        Queue<Integer> q=new LinkedList<>();
+        q.add(0);
         int start=0;
         int end=0;
-        for(int i=0;i<n;i++){
-            if(!dp[i]) continue;
-            start=Math.max(i+minJump,end+1);
-            end=Math.min(i+maxJump,n-1);
-            for(int j=start;j<=end;j++){
-                if(s.charAt(j)=='0') dp[j]=true;
+        while(!q.isEmpty()){
+            int temp=q.poll();
+            start=Math.max(temp+minJump,end+1);
+            end=Math.min(temp+maxJump,n-1);
+            for(int i=start;i<=end;i++){
+                if(s.charAt(i)=='0'){
+                    q.add(i);
+                }
             }
-            if(dp[n-1]) return true;
+            if(temp==(n-1)) return true;
         }
-        return dp[n-1];
+        return false;
     }
     // recursive approach
     // public boolean func(String s,int min,int max,int idx){
