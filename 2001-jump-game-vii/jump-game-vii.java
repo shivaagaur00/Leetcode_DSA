@@ -1,7 +1,6 @@
 class Solution {
     public boolean canReach(String s, int minJump, int maxJump) {
         int n=s.length();
-        if(s.charAt(s.length()-1)=='1') return false;
         Queue<Integer> q=new LinkedList<>();
         q.add(0);
         int start=0;
