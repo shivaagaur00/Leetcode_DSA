@@ -5,12 +5,12 @@ class Solution {
         int i=0;
         while(i<n){
             boolean flag=true;
-            String temp="";
+            StringBuilder temp=new StringBuilder("");
             char prev=s.charAt(i);
             while(i<n && s.charAt(i)==prev){
-                temp+=prev;
+                temp.append(prev);
                 if(temp.length()==k){
-                    temp="";
+                    temp=new StringBuilder("");
                 }
                 i++;
                 flag=false;
@@ -19,16 +19,16 @@ class Solution {
                 if(!st.isEmpty() && st.peek().charAt(0)==prev){
                     String t=st.pop()+temp;
                     int kn=t.length()%k;
-                    temp=t.substring(0,kn);
+                    temp=new StringBuilder(t.substring(0,kn));
                 }
-                if(temp.length()>0) st.push(temp);
+                if(temp.length()>0) st.push(temp.toString());
             }
             if(flag) i++;
         }
-        String ans="";
+        StringBuilder ans=new StringBuilder("");
         while(!st.isEmpty()){
-            ans=st.pop()+ans;
+            ans.insert(0,st.pop());
         }
-        return ans;
+        return ans.toString();
     }
 }
