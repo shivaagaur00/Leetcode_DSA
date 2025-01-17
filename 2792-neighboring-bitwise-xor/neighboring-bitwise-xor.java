@@ -15,7 +15,7 @@ class Solution {
             else if(arr[i]==0 && derived[i]==0) arr[i+1]=0;
             else if(arr[i]==0 && derived[i]==1) arr[i+1]=1;
             else if(arr[i]==1 && derived[i]==0) arr[i+1]=1;
-            else if(arr[i]==0 && derived[i]==1) arr[i+1]=0;
+            else if(arr[i]==1 && derived[i]==1) arr[i+1]=0;
         }
         return false;
     }
