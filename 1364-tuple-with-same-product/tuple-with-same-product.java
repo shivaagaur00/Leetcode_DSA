@@ -10,6 +10,7 @@ class Solution {
         }
         for(int key:map.keySet()){
             if(map.get(key)>1) ans+=(map.get(key)*(map.get(key)-1)/2)*8;
+            // Combinationformula=nC2=n*(n-1)/2;
         }
         return ans;
     }
