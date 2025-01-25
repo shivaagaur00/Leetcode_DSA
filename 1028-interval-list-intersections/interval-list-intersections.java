@@ -13,11 +13,6 @@ class Solution {
                 }
             }
         }
-        int ans[][]=new int[arr.size()][2];
-        for(int i=0;i<arr.size();i++){
-            ans[i][0]=arr.get(i)[0];
-            ans[i][1]=arr.get(i)[1];
-        }
-        return ans;
+        return arr.toArray(new int[0][]);
     }
 }
