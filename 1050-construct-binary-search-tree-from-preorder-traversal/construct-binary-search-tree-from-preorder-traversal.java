@@ -15,16 +15,16 @@
  */
 class Solution {
     public TreeNode bstFromPreorder(int[] preorder) {
-        TreeNode root=null;
-        for(int i=0;i<preorder.length;i++){
-            root=func(root,preorder[i]);
+        TreeNode root=new TreeNode(preorder[0]);
+        for(int a:preorder){
+            root=func(root,a);
         }
         return root;
     }
     public TreeNode func(TreeNode root,int val){
         if(root==null) return new TreeNode(val);
         if(root.val>val) root.left=func(root.left,val);
-        else if(root.val<val) root.right=func(root.right,val);
+        if(root.val<val) root.right=func(root.right,val);
         return root;
     }
 }
