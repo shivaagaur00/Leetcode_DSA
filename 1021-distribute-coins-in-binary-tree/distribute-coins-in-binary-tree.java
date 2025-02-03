@@ -16,7 +16,7 @@
 class Solution {
     int coins=0;
     public int distributeCoins(TreeNode root) {
-        int ans=func(root);
+        func(root);
         return coins;
     }
     public int func(TreeNode root){
