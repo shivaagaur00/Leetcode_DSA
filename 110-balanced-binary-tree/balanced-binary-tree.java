@@ -14,19 +14,16 @@
  * }
  */
 class Solution {
+    boolean result=true;
     public boolean isBalanced(TreeNode root) {
-        if(root==null) return true;
-        int a=height(root.left);
-        int b=height(root.right);
-        if(Math.abs(a-b)>1) return false;
-        boolean aa=isBalanced(root.left);
-        boolean bb=isBalanced(root.right);
-        return aa&&bb;
+        func(root);
+        return result;
     }
-    public int height(TreeNode root){
+    public int func(TreeNode root){
         if(root==null) return 0;
-        int a=height(root.left);
-        int b=height(root.right);
+        int a=func(root.left);
+        int b=func(root.right);
+        if(Math.abs(a-b)>1) result=false;
         return Math.max(a,b)+1;
     }
 }
