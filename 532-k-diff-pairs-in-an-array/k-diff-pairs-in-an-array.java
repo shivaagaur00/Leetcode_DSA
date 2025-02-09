@@ -15,13 +15,9 @@ class Solution {
             }
             else if(diff>k){
                 i++;
-                if(i==j){
-                    j++;
-                }
+                if(i==j) j++;
             }
-            else{
-                j++;                
-            }
+            else j++;               
         }
         return ans;
     }
