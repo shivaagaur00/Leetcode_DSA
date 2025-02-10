@@ -8,10 +8,6 @@ class Solution {
         for (int i = 0;i<arr.length;i++) {
             max=Math.max(max,(arr[i]*(right[i]-left[i]-1)));
         }
-        // Collections.reverse(rightarr);
-        // System.out.println(leftarr);
-        // System.out.println(rightarr);
-
         return max;
     }
     public int[] left(int arr[],List<Integer> left) {
@@ -23,12 +19,12 @@ class Solution {
             }
             if (stack.isEmpty()){
                 ans[i] = -1;
-                left.add(-1);
+                // left.add(-1);
             }
 
             else{
                 ans[i] = stack.peek();
-                left.add(stack.peek());
+                // left.add(stack.peek());
             }
             stack.push(i);
         }
