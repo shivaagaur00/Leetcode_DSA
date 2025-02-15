@@ -8,19 +8,13 @@ class Solution {
             map.get(arr[i][0]).add(arr[i][1]);
         }
         int[] visited = new int[n];
-        boolean hasCycle = false;
         for (int i = 0; i < n; i++) {
             if (visited[i] == 0) {
                 if (dfs(i, map, visited)) {
-                    hasCycle = true;
-                    break;
+                    return false;
                 }
             }
         }
-
-        if (hasCycle) {
-            return false;
-        } 
         return true;
     }
 
