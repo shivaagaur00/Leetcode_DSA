@@ -1,51 +1,27 @@
 class Solution {
-    public int largestRectangleArea(int[] arr) {
-        int max = 0;
-        List<Integer> leftarr=new ArrayList<>();
-        List<Integer> rightarr=new ArrayList<>();
-        int[] left=left(arr);
-        int[] right=right(arr);
-        for (int i = 0;i<arr.length;i++) {
-            max=Math.max(max,(arr[i]*(right[i]-left[i]-1)));
+    public int largestRectangleArea(int[] heights) {
+        int n=heights.length;
+        int left[]=new int[n];
+        Stack<Integer> stack=new Stack<>();
+        for(int i=0;i<n;i++){
+            while(!stack.isEmpty() && heights[stack.peek()]>=heights[i]) stack.pop();
+            if(stack.isEmpty()) left[i]=-1;
+            else left[i]=stack.peek();
+            stack.push(i);
+        }
+        stack.clear();
+        int[] right=new int[n];
+        for(int i=n-1;i>=0;i--){
+            while(!stack.isEmpty() && heights[stack.peek()]>=heights[i]) stack.pop();
+            if(stack.isEmpty()) right[i]=n;
+            else right[i]=stack.peek();
+            stack.push(i);
+        }
+        int max=0;
+        for(int i=0;i<n;i++){
+            max=Math.max(max,(right[i]-left[i]-1)*heights[i]);
         }
         return max;
+
     }
-    public int[] left(int arr[]) {
-        Stack<Integer> stack = new Stack<>();
-        int[] ans = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
-                stack.pop();
-            }
-            if (stack.isEmpty()){
-                ans[i] = -1;
-            }
-
-            else{
-                ans[i] = stack.peek();
-            }
-            stack.push(i);
-        }
-        return ans;
-    }
-
-    public int[] right(int arr[])  {
-        Stack<Integer> stack = new Stack<>();
-        int[] ans = new int[arr.length];
-        for (int i = arr.length - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
-                stack.pop();
-            }
-            if (stack.isEmpty()){
-                ans[i] = arr.length;
-            }
-
-            else{
-                ans[i] = stack.peek();
-            }
-            stack.push(i);
-        }
-        return ans;
-    }
-
 }
