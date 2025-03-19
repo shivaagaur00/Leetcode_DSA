@@ -8,11 +8,11 @@ class Solution {
         Map<Character,Integer> map=new HashMap<>();
         while(i<n){
                 char c=s.charAt(i);
-                if(map.containsKey(c) && map.get(c)>=l){
+                if(map.containsKey(c) && map.get(c)+1>l){
                     l=map.get(c)+1;
                 }
+                max=Math.max(max,(i-l+1));
                 map.put(c,i);
-                max=Math.max(max,i-l+1);
                 i++;
             }
         return max;
