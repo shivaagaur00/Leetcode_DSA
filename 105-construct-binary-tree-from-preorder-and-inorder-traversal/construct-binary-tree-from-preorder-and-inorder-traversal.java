@@ -16,21 +16,20 @@
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         Map<Integer,Integer> map=new HashMap<>();
-        int i=0;
-        for(int a:inorder){
-            map.put(a,i++);
-        } 
-        TreeNode root=func(preorder,0,preorder.length-1,inorder,0,inorder.length-1,map);
+        int n=preorder.length;
+        for(int i=0;i<n;i++){
+            map.put(inorder[i],i);
+        }
+        TreeNode root=new TreeNode();
+        return func(map,preorder,0,n-1,inorder,0,n-1);
+    }
+    public TreeNode func(Map<Integer,Integer> map,int[] pre,int pi,int pj,int in[],int ii,int ij){
+        if(pi>pj || ii>ij) return null;
+        TreeNode root=new TreeNode(pre[pi]);
+        int id=map.get(pre[pi]);
+        int x=id-ii;
+        root.left=func(map,pre,pi+1,pi+x,in,ii,ii+x-1);
+        root.right=func(map,pre,pi+x+1,pj,in,id+1,ij);
         return root;
     }
-    public TreeNode func(int[]preorder,int i1,int j1,int[]inorder,int i2,int j2,Map<Integer,Integer> map){
-        if(i1>j1 || i2>j2) return null;
-        TreeNode root=new TreeNode(preorder[i1]);
-        int a=map.get(preorder[i1]);
-        int left=a-i2;
-        root.left=func(preorder,i1+1,i1+left,inorder,i2,a-1,map);
-        root.right=func(preorder,i1+left+1,j1,inorder,a+1,j2,map);
-        return root;
-    }
-
 }
