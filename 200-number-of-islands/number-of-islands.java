@@ -1,50 +1,45 @@
 class Solution {
     public int numIslands(char[][] grid) {
-        boolean visited[][] = new boolean[grid.length][grid[0].length];
-        int ans = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j]=='1' && !visited[i][j]) {
+        int n=grid.length;
+        int m=grid[0].length;
+        int ans=0;
+        boolean[][] visited=new boolean[grid.length][grid[0].length];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(!visited[i][j] && grid[i][j]=='1'){
+                    bfs(visited,i,j,grid);
                     ans++;
-                    bfs(i, j, visited, grid);
                 }
             }
         }
         return ans;
     }
-
-    class pair {
+    class Pair{
         int first;
         int second;
-
-        pair(int first, int second) {
-            this.first = first;
-            this.second = second;
+        Pair(int first,int second){
+            this.first=first;
+            this.second=second;
         }
     }
-    public void bfs(int row, int col, boolean[][] vis, char[][] grid) {
-        vis[row][col]=true;
-        Queue<pair> q = new LinkedList<>();
-        q.add(new pair(row, col));
-        while (!q.isEmpty()) {
-            pair temp = q.poll();
-            row = temp.first;
-            col = temp.second;
-            if(col+1<grid[0].length && grid[row][col+1]=='1' && !vis[row][col+1]){
-                vis[row][col+1]=true;
-                q.add(new pair(row,col+1));
-            }
-            if(col-1>=0  && grid[row][col-1]=='1' && !vis[row][col-1]){
-                vis[row][col-1]=true;
-                q.add(new pair(row,col-1));
-            }
-            if(row+1<grid.length && grid[row+1][col]=='1' && !vis[row+1][col]){
-                vis[row+1][col]=true;
-                q.add(new pair(row+1,col));
-            }
-            if(row-1>=0  && grid[row-1][col]=='1' && !vis[row-1][col]){
-                vis[row-1][col]=true;
-                q.add(new pair(row-1,col));
+    int[][]dis={{0,1},{1,0},{-1,0},{0,-1}};
+    public void bfs(boolean[][] vis,int i,int j,char[][]grid){
+        int n=grid.length;
+        int m=grid[0].length;
+        vis[i][j]=true;
+        Queue<Pair> q=new LinkedList<>();
+        q.add(new Pair(i,j));
+        while(!q.isEmpty()){
+            Pair temp=q.poll();
+            int ii=temp.first;
+            int jj=temp.second;
+            for(int[] dir:dis){
+                int newii=ii+dir[0];
+                int newjj=jj+dir[1];
+                if(newii<n && newjj<m && newii>=0 && newjj>=0 && grid[newii][newjj]=='1' && !vis[newii][newjj]){
+                    q.add(new Pair(newii,newjj));
+                    vis[newii][newjj]=true;
+                }
             }
         }
     }
