@@ -1,49 +1,52 @@
 class Solution {
     public int numEnclaves(int[][] grid) {
-        int ans=0;
+        boolean[][] vis=new boolean[grid.length][grid[0].length];
         int n=grid.length;
         int m=grid[0].length;
-        boolean vis[][]=new boolean[n][m];
+        int ans=0;
         for(int i=0;i<n;i++){
-            if(grid[i][0]==1) bfs(grid,i,0);
-            if(grid[i][m-1]==1) bfs(grid,i,m-1);
+            if(grid[i][0]==1) bfs(vis,grid,i,0);
+            if(grid[i][m-1]==1) bfs(vis,grid,i,m-1);
         }
         for(int i=0;i<m;i++){
-            if(grid[0][i]==1) bfs(grid,0,i);
-            if(grid[n-1][i]==1) bfs(grid,n-1,i);
+            if(grid[0][i]==1) bfs(vis,grid,0,i);
+            if(grid[n-1][i]==1) bfs(vis,grid,n-1,i);
         }
-        for(int i[]:grid){
-            for(int j:i){
-                if(j==1) ans++;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1) ans++;
             }
         }
         return ans;
     }
-    int[][] directions={{1,0},{0,1},{0,-1},{-1,0}};
-    public void bfs(int[][]grid,int i,int j){
+    class pair{
+        int first;
+        int second;
+        pair(int first,int second){
+            this.first=first;
+            this.second=second;
+        }
+    }
+    int dir[][]={{0,1},{1,0},{-1,0},{0,-1}};
+    public void bfs(boolean vis[][],int grid[][],int i,int j){
         grid[i][j]=2;
         Queue<pair> q=new LinkedList<>();
         q.add(new pair(i,j));
+        int n=grid.length;
+        int m=grid[0].length;
         while(!q.isEmpty()){
             pair temp=q.poll();
-            int row=temp.i;
-            int col=temp.j;
-            for(int[] dir:directions){
-                int r=row+dir[0];
-                int c=col+dir[1];
-                if(r<grid.length && c<grid[0].length && c>=0 && r>=0 && grid[r][c]==1){
-                    q.add(new pair(r,c));
-                    grid[r][c]=2;
+            int ii=temp.first;
+            int jj=temp.second;
+            for(int[] dis:dir){
+                int newii=ii+dis[0];
+                int newjj=jj+dis[1];
+                if(newii>=0 && newjj>=0 && newii<n && newjj<m && grid[newii][newjj]==1){
+                    q.add(new pair(newii,newjj));
+                    grid[newii][newjj]=2;
                 }
             }
         }
     }
-}
-class pair{
-    int i;
-    int j;
-    pair(int i,int j){
-        this.i=i;
-        this.j=j;
-    }
+
 }
