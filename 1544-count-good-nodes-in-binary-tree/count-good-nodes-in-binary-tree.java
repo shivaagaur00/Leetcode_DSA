@@ -21,8 +21,11 @@ class Solution {
     }
     public void func(TreeNode root,int max){
         if(root==null) return;
-        if(root.val>=max) ans++;
-        func(root.left,Math.max(max,root.val));
-        func(root.right,Math.max(max,root.val));
+        if(root.val>=max){
+            ans++;
+            System.out.println(root.val);
+        }
+        func(root.left,Math.max(root.val,max));
+        func(root.right,Math.max(root.val,max));
     }
 }
