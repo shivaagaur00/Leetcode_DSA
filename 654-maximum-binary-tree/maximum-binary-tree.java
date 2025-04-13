@@ -15,21 +15,21 @@
  */
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
-        return func(nums,0,nums.length-1);
+        return func(0,nums.length-1,nums);
     }
-    public TreeNode func(int[] nums,int i,int j){
+    public TreeNode func(int i,int j,int[] nums){
         if(i>j) return null;
         int max=Integer.MIN_VALUE;
-        int k=i;
+        int idx=i;
         for(int id=i;id<=j;id++){
             if(max<nums[id]){
+                idx=id;
                 max=nums[id];
-                k=id;
             }
         }
-        TreeNode node=new TreeNode(max);
-        node.left=func(nums,i,k-1);
-        node.right=func(nums,k+1,j);
-        return node;
+        TreeNode root=new TreeNode(max);
+        root.left=func(i,idx-1,nums);
+        root.right=func(idx+1,j,nums);
+        return root;
     }
 }
