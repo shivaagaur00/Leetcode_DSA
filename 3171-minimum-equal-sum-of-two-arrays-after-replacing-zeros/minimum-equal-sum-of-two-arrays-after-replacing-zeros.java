@@ -17,15 +17,9 @@ class Solution {
                 zeroB++;
             }
         }
-        if(zeroA==0){
-            if((countB+zeroB)>countA) return -1;
-        }
-        else if(zeroB==0){
-            if((countA+zeroA)>countB) return -1;
-        }
+        if(zeroA==0 && (countB+zeroB)>countA) return -1;
+        if(zeroB==0 && (countA+zeroA)>countB) return -1;
         if(zeroA==0 && zeroB==0 && countA!=countB) return -1 ;
-        // System.out.println(countA+" "+countB);
         return Math.max(countA+zeroA,countB+zeroB);
-
     }
 }
