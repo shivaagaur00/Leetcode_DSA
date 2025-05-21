@@ -20,16 +20,15 @@ class Solution {
         for(int i=0;i<n;i++){
             map.put(inorder[i],i);
         }
-        TreeNode root=new TreeNode();
-        return func(map,preorder,0,n-1,inorder,0,n-1);
+        return func(preorder,inorder,0,n-1,0,n-1,map);
     }
-    public TreeNode func(Map<Integer,Integer> map,int[] pre,int pi,int pj,int in[],int ii,int ij){
+    public TreeNode func(int []pre,int []in,int pi,int pj,int ii,int ij,Map<Integer,Integer> map){
         if(pi>pj || ii>ij) return null;
         TreeNode root=new TreeNode(pre[pi]);
-        int id=map.get(pre[pi]);
-        int x=id-ii;
-        root.left=func(map,pre,pi+1,pi+x,in,ii,ii+x-1);
-        root.right=func(map,pre,pi+x+1,pj,in,id+1,ij);
+        int mid=map.get(pre[pi]);
+        int left=mid-ii;
+        root.left=func(pre,in,pi+1,pi+left,ii,mid-1,map);
+        root.right=func(pre,in,pi+left+1,pj,mid+1,ij,map);
         return root;
     }
 }
