@@ -14,7 +14,6 @@
  * }
  */
 class Solution {
-    boolean result=true;
     public boolean isBalanced(TreeNode root) {
         pair p=func(root);
         if(p.flag) return true;
@@ -24,14 +23,7 @@ class Solution {
         if(root==null) return new pair(true,0);
         pair a=func(root.left);
         pair b=func(root.right);
-        if(!a.flag || !b.flag) {
-            // System.out.println(0);
-            return new pair(false,Math.max(a.len,b.len)+1); 
-        }
-        if(Math.abs(a.len-b.len)>1){
-            //  System.out.println(1);
-            return new pair(false,Math.max(a.len,b.len)+1);
-        }
+        if(!a.flag || !b.flag || Math.abs(a.len-b.len)>1) return new pair(false,Math.max(a.len,b.len)+1);
         return new pair(true,Math.max(a.len,b.len)+1);
     }
 }
