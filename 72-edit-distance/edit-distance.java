@@ -21,8 +21,8 @@ class Solution {
         int de=0;
         if(s1.charAt(i)==s2.charAt(j)) return dp[i][j]=func(i-1,j-1,s1,s2,dp);
         else{
-            in =1+func(i-1,j,s1,s2,dp);
-            de =1+func(i,j-1,s1,s2,dp);
+            in =1+func(i,j-1,s1,s2,dp);
+            de =1+func(i-1,j,s1,s2,dp);
             re =1+func(i-1,j-1,s1,s2,dp);
         }
         return dp[i][j] = Math.min(in, Math.min(re, de));
