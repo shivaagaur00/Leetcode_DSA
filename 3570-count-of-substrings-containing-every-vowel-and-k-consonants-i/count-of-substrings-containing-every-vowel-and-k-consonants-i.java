@@ -1,24 +1,47 @@
 class Solution {
-    public  int countOfSubstrings(String s, int k) {
-        int ans = 0;
-        int n = s.length();
+    public int countOfSubstrings(String word, int k) {
+        int n = word.length(), start = 0, left = 0, ans = 0;
+        int[] charCnt = new int[6];
 
-        for (int i = 0; i < n; i++) {
-            int a = 0, e = 0, i_count = 0, o = 0, u = 0, c = 0;
-            for (int j = i; j < n; j++) {
-                if (s.charAt(j) == 'a') a++;
-                else if (s.charAt(j) == 'e') e++;
-                else if (s.charAt(j) == 'i') i_count++;
-                else if (s.charAt(j) == 'o') o++;
-                else if (s.charAt(j) == 'u') u++;
-                else c++;
+        for (int rght = 0; rght < n; rght++) {
+            charCnt[getIndex(word.charAt(rght))]++;
 
-                if (a > 0 && e > 0 && i_count > 0 && o > 0 && u > 0 && c == k) {
-                    ans++;
+            while (left < rght && charCnt[5] > k) {
+                charCnt[getIndex(word.charAt(left))]--;
+                left++;
+                start = left;
+            }
+
+            while (charCnt[5] == k && left < rght) {
+                int idx = getIndex(word.charAt(left));
+                if (idx < 5) {
+                    if (charCnt[idx] > 1) {
+                        charCnt[idx]--;
+                        left++;
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
                 }
+            }
+
+            if (charCnt[5] == k && Arrays.stream(charCnt, 0, 5).min().orElse(1) > 0) {
+                ans += (left - start + 1);
             }
         }
 
         return ans;
     }
+
+    private int getIndex(char ch) {
+        switch (ch) {
+            case 'a': return 0;
+            case 'e': return 1;
+            case 'i': return 2;
+            case 'o': return 3;
+            case 'u': return 4;
+            default : return 5; 
+        }
+    } 
 }
