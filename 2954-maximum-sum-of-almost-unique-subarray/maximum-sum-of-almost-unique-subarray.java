@@ -10,7 +10,6 @@ class Solution {
             map.put(nums.get(i),map.getOrDefault(nums.get(i),0)+1);
             if(map.size()>=m && (i-j+1)==k){
                 ans=Math.max(ans,sum);
-                // System.out.println(sum+" "+i+" "+j+" "+map);
             }
             if((i-j+1)==k){
                 sum-=nums.get(j);
