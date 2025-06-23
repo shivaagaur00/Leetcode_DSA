@@ -1,18 +1,18 @@
 class Solution {
     public int minDeletions(String s) {
         int[] arr=new int[26];
-        for(char c:s.toCharArray()){
-            arr[c-'a']++;
+        int result=0;
+        for(int i=0;i<s.length();i++){
+            arr[s.charAt(i)-'a']++;
         }
-        List<Integer> list=new ArrayList<>();
-        int ans=0;
-        for(int a:arr){
-            while(a>0 && list.contains(a)){
-                a--;
-                ans++;
+        Set<Integer> set=new HashSet<>();
+        for(int i=0;i<26;i++){
+            while(set.contains(arr[i]) && arr[i]!=0){
+                arr[i]--;
+                result++;
             }
-            if(a>0) list.add(a);
+            set.add(arr[i]);
         }
-        return ans;
+        return result;
     }
 }
