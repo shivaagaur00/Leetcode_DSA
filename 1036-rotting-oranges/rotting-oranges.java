@@ -13,43 +13,43 @@ class Solution {
             }
         }
         int ans=0;
-        int[][] direction={ { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+        int direction[][]={{0,1},{1,0},{-1,0},{0,-1}};
         while(!q.isEmpty()){
             int nn=q.size();
             boolean isRot=false;
             while(nn-->0){
                 pair temp=q.poll();
-                int r=temp.first;
-                int c=temp.second;
-                for(int[] i:direction){
-                    int rr=r+i[0];
-                    int cc=c+i[1];
-                    if(rr>=0 && cc>=0 && rr<m && cc<n && !vis[rr][cc] && grid[rr][cc]!=0){
-                        q.add(new pair(rr,cc));
-                        vis[rr][cc]=true;
-                        grid[rr][cc]=2;
+                int currI=temp.i;
+                int currJ=temp.j;
+                for(int[] a:direction){
+                    int ci=currI+a[0];
+                    int cj=currJ+a[1];
+                    if(ci>=0 && cj>=0 && ci<m && cj<n && !vis[ci][cj] && grid[ci][cj]==1){
+                        q.add(new pair(ci,cj));
+                        vis[ci][cj]=true;
+                        grid[ci][cj]=2;
                         isRot=true;
                     }
                 }
             }
-                if(isRot) ans++;
-                else break;
-        } 
-         for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+            if(isRot) ans++;
+            else break;
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1)
                     return -1;
             }
         }
         return ans;
+    
     }
-}
-class pair {
-        int first;
-        int second;
-
-        pair(int first, int second) {
-            this.first = first;
-            this.second = second;
+    class pair{
+        int i;
+        int j;
+        pair(int i,int j){
+            this.i=i;
+            this.j=j;
         }
     }
+}
