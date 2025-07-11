@@ -1,47 +1,45 @@
-class Pair{
-    int distance;
-    int row;
-    int col;
-    Pair(int distance, int row, int col){
-        this.distance=distance;
-        this.row=row;
-        this.col=col;
+class pair{
+    int d;
+    int r;
+    int c;
+    pair(int r,int c,int d){
+        this.r=r;
+        this.c=c;
+        this.d=d;
     }
 }
 class Solution {
     public int shortestPathBinaryMatrix(int[][] grid) {
         if(grid[0][0]==1) return -1;
-        int n=grid.length;
-        int[][] dist=new int[n][n];
-        Queue<Pair> q=new LinkedList<>();
-        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
-        for(int i=0; i<n; i++){
-            for (int j=0; j<n; j++){
-                dist[i][j]=(int)1e9;
-            }
-        }
-        dist[0][0]=0;
-        q.add(new Pair(0, 0, 0));
-        int x[]={0, 1, 1, 1, 0, -1, -1, -1};
-        int y[]={1, 1, 0, -1, -1, -1, 0, 1};
+        int rg[]={0,0,-1,1,-1,-1,1,1};
+        int cg[]={-1,1,0,0,-1,1,-1,1};
+        int m=grid.length;
+        int n=grid[0].length;
+        Queue<pair> q=new LinkedList<>();
+        q.add(new pair(0,0,0));
+        int arr[][]=new int[m][n];
+        for(int a[]:arr) Arrays.fill(a,Integer.MAX_VALUE);
+        arr[0][0]=0;
         while(!q.isEmpty()){
-            Pair node=q.remove();
-            int distance=node.distance;
-            int row=node.row;
-            int col=node.col;
-            if(row==n-1 && col==n-1){
-                dist[row][col]++;
+            pair t=q.poll();
+            int r=t.r;
+            int c=t.c;
+            int d=t.d;
+            if(r==m-1 && c==n-1){
+                arr[r][c]++;
                 break;
             }
-            for(int i=0; i<8; i++){
-                int nRow=row+x[i];
-                int nCol=col+y[i];
-                if(nRow>=0 && nRow<n && nCol>=0 && nCol<n && distance+1<dist[nRow][nCol] && grid[nRow][nCol]==0){
-                    dist[nRow][nCol]=distance+1;
-                    q.add(new Pair(distance+1, nRow, nCol));
+            for(int i=0;i<8;i++){
+                int nr=rg[i]+r;
+                int nc=cg[i]+c;
+                if(nr>=0 && nc>=0 && nr<m && nc<n && grid[nr][nc]==0 && d+1<arr[nr][nc]){
+                    arr[nr][nc]=d+1;
+                    q.add(new pair(nr,nc,d+1));
+                    // System.out.println(nr+" "+nc);
                 }
             }
         }
-        return dist[n-1][n-1]==1e9?-1:dist[n-1][n-1];
+        return arr[m-1][n-1]==Integer.MAX_VALUE?-1:arr[m-1][n-1];
+        
     }
 }
