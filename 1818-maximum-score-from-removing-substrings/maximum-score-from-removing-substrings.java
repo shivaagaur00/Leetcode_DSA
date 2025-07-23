@@ -16,9 +16,11 @@ class Solution {
             else st.push(c);
         }
         s="";
+        StringBuilder sb=new StringBuilder();
         while(!st.isEmpty()){
-            s+=(st.pop());
+            sb.append(st.pop());
         }
+        s=sb.toString();
         for(char c:s.toCharArray()){
             if(!st.isEmpty() && st.peek()==r.charAt(0) && c==r.charAt(1)){
                 st.pop();
