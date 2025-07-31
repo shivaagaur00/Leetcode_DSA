@@ -1,37 +1,33 @@
 class Solution {
     public int findCircleNum(int[][] isConnected) {
-       int n=isConnected.length;
-       List<List<Integer>> conn=new ArrayList<>();
-       for(int i=0;i<n;i++){
-        conn.add(new ArrayList<>());
-       } 
-       for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(isConnected[i][j]==1){
-                conn.get(i).add(j);
-                conn.get(j).add(i);
+        Map<Integer,Set<Integer>> map=new HashMap<>();
+        int n=isConnected.length;
+        for(int i=0;i<n;i++){
+            map.put(i,new HashSet<>());
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(i!=j && isConnected[i][j]==1){
+                    map.get(i).add(j);
+                }
             }
         }
-       }
-       int ans=0;
-
-       boolean[] vis=new boolean[n];
-       Arrays.fill(vis,false);
-       for(int i=0;i<n;i++){
-        if(!vis[i]){
-            ans++;
-            dfs(conn,i,vis);
+        // System.out.println(map);
+    
+        int count=0;
+        boolean vis[]=new boolean[n];
+        for(int i=0;i<n;i++){
+                if(!vis[i]){
+                    dfs(i,map,vis);
+                    count++;
+            }
         }
-       }
-       return ans;
+        return count;
     }
-    public void dfs(List<List<Integer>> conn,int id,boolean vis[]){
-        vis[id]=true;
-        for(int i=0;i<conn.get(id).size();i++){
-            if(!vis[conn.get(id).get(i)]){
-                dfs(conn,conn.get(id).get(i),vis);
-            }
+    public void dfs(int i,Map<Integer,Set<Integer>> map, boolean[] vis){
+        vis[i]=true;
+        for(int a:map.get(i)){
+            if(!vis[a]) dfs(a,map,vis);
         }
-        return;
     }
 }
