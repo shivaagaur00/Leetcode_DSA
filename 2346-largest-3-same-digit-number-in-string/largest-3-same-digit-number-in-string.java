@@ -5,6 +5,9 @@ class Solution {
         for(int i=0;i<=n-3;i++){
             if(num.charAt(i)==num.charAt(i+1) && num.charAt(i+1)==num.charAt(i+2)) max=Math.max(max,num.charAt(i)-'0');
         }
-        return max==-1?"":""+max+max+max;
+        StringBuilder st=new StringBuilder(""+max);
+        st.append(st);
+        st.append(max);
+        return max==-1?"":st.toString();
     }
 }
