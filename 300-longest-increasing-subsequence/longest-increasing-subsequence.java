@@ -10,14 +10,12 @@ class Solution {
     public int func(int[] nums, int idx, int prevIdx, int[][] dp) {
         if (idx == nums.length) return 0;
         if (dp[idx][prevIdx + 1] != -1) return dp[idx][prevIdx + 1];
-
         int notTake = func(nums, idx + 1, prevIdx, dp);
         int take = 0;
         if (prevIdx == -1 || nums[idx] >nums[prevIdx]) {
             take = 1 + func(nums, idx + 1, idx, dp);
         }
-
-        dp[idx][prevIdx + 1] = Math.max(take, notTake);
-        return dp[idx][prevIdx + 1];
+        return dp[idx][prevIdx + 1] = Math.max(take, notTake);
+        
     }
 }
