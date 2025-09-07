@@ -13,13 +13,9 @@ class Solution {
         for(int i=0;i<n;i++){
             for(int j=0;j<(n-i);j++){
                 for(int k=0;k<(n2-i);k++){
-                    if(check(s1,s2,j,k,i)){
-                        ans++;
-                        // System.out.println(j+" "+k+" "+i);
-                    }
+                    if(check(s1,s2,j,k,i)) ans++;
                 }
             }
-            // if(i==0) System.out.println(ans);
         }
         return ans;
     }
