@@ -17,23 +17,13 @@ class Solution {
                 ans+=ct/3;
             }
             else{
-                // if(ct%2==0){
                     int temp=ct-2;
                     ans+=temp/3;
                     if(temp%3!=0){
                         ans+=1;
                     }
                     ans+=+1;
-                // }
-                // else{
-
-                // }
-                // if(ct%3>1){
-                //     ans+=(ct%3-1);
-                //     ct=
-                // }
             }
-            // System.out.println(a+" "+ct+" "+ans);
         }
         return ans;
     }
