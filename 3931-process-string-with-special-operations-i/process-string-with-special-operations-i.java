@@ -6,7 +6,7 @@ class Solution {
                 st.append(c);
             }
             else if(c=='*' && st.length()>0){
-                st=new StringBuilder(st.substring(0,st.length()-1));
+                st.deleteCharAt(st.length() - 1);
             }
             else if(c=='#'){
                 st.append(st);
