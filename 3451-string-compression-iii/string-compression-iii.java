@@ -1,23 +1,27 @@
 class Solution {
     public String compressedString(String word) {
-        String ans="";
-        int n=0;
-        char c=word.charAt(0);
-        for(int i=0;i<word.length();i++){
-            if(word.charAt(i)!=c){
-                if(n>0) ans+=""+n+c;
-                c=word.charAt(i);
-                n=1;
-            }
-            else{
-                n++;
-                if(n==9){
-                    ans+="9"+c;
-                    n=0;
+        char prevChar=word.charAt(0);
+        int count=1;
+        StringBuilder ans=new StringBuilder();
+        int n=word.length();
+        for(int i=1;i<n;i++){
+            if(word.charAt(i)==prevChar){
+                count++;
+                if(count==10){
+                    ans.append(9);
+                    ans.append(prevChar);
+                    count=1;
                 }
             }
+            else{
+                ans.append(count);
+                ans.append(prevChar);
+                count=1;
+                prevChar=word.charAt(i);
+            }
         }
-        if(n>0) ans+=""+n+c;
-        return ans;
+        ans.append(count);
+        ans.append(prevChar);
+        return ans.toString();
     }
 }
