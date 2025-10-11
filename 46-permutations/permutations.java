@@ -1,23 +1,24 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> ds = new ArrayList<>();
-        boolean freq[] = new boolean[nums.length];
-        rec(ans, ds, freq, nums);
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> temp=new ArrayList<>();
+        boolean freq[]=new boolean[nums.length];
+        func(ans,temp,nums,freq);
         return ans;
     }
-    public void rec(List<List<Integer>> ans, List<Integer> ds, boolean[] freq, int[] nums) {
-        if (ds.size() == nums.length) {
-            ans.add(new ArrayList<>(ds));
+    public void func(List<List<Integer>> ans,List<Integer> arr,int[] nums,boolean[] freq){
+        int n=nums.length;
+        if(arr.size()==n){
+            ans.add(new ArrayList<>(arr));
             return;
         }
-        for (int i = 0; i < nums.length; i++) {
-            if (!freq[i]) {
-                freq[i] = true;
-                ds.add(nums[i]);
-                rec(ans, ds, freq, nums);
-                freq[i] = false;
-                ds.remove(ds.size() - 1);
+        for(int i=0;i<n;i++){
+            if(!freq[i]){
+                arr.add(nums[i]);
+                freq[i]=true;
+                func(ans,arr,nums,freq);
+                freq[i]=false;
+                arr.remove(arr.size()-1);
             }
         }
     }
