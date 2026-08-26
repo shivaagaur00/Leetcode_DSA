@@ -21,9 +21,9 @@ class Solution {
         }
         Collections.sort(arr);
 
-        System.out.println(min);
+        // System.out.println(min);
         
-        System.out.println(arr);
+        // System.out.println(arr);
         if(arr.size()==0) return "";
         for(String st:arr){
             if(st.length()==min) return st;
