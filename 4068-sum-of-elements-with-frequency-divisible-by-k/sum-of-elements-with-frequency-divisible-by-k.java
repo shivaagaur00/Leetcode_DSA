@@ -5,8 +5,8 @@ class Solution {
             map.put(a,map.getOrDefault(a,0)+1);
         }
         int ans=0;
-        for(int a:nums){
-            if(map.get(a)%k==0) ans+=a;
+        for(int a:map.keySet()){
+            if(map.get(a)%k==0) ans+=a*map.get(a);
         }
         return ans;
     }
