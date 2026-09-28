@@ -1,6 +1,6 @@
 class Solution {
     public int countConsistentStrings(String allowed, String[] words) {
-        int count=0;
+        int count=words.length;
         HashMap<Character,Integer> map=new HashMap<>();
         for(int i=0;i<allowed.length();i++){
             map.put(allowed.charAt(i),map.getOrDefault(allowed.charAt(i),0)+1);
@@ -12,16 +12,15 @@ class Solution {
 
 
             }
-            boolean flag=true;
+            
             for(char ch:map1.keySet()){
                 if((!map.containsKey(ch))){
-                    flag=false;
+                    count--;
+                    break;
                 }
                 
             }
-            if(flag){
-                count++;
-            }
+            
         }
         return count;
         
