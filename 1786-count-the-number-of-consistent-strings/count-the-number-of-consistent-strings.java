@@ -1,18 +1,31 @@
 class Solution {
     public int countConsistentStrings(String allowed, String[] words) {
-        int[] count=new int[26];
-        for(char c:allowed.toCharArray()){
-            count[c-'a']++;
+        int count=0;
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int i=0;i<allowed.length();i++){
+            map.put(allowed.charAt(i),map.getOrDefault(allowed.charAt(i),0)+1);
         }
-        int ans=0;
-        for(int j=0;j<26;j++){
-            for(int i=0;i<words.length;i++){
-                if(count[j]==0 && words[i].contains(""+(char)(j+'a'))){
-                    words[i]="";
-                    ans++;
+        for(int i=0;i<words.length;i++){
+            HashMap<Character,Integer> map1= new HashMap<>();
+            for( int j=0;j<words[i].length();j++){
+                map1.put(words[i].charAt(j),map.getOrDefault(words[i].charAt(j),0)+1);
+
+
+            }
+            boolean flag=true;
+            for(char ch:map1.keySet()){
+                if((!map.containsKey(ch))){
+                    flag=false;
                 }
+                
+            }
+            if(flag){
+                count++;
             }
         }
-        return words.length-ans;
+        return count;
+        
+
+        
     }
 }
