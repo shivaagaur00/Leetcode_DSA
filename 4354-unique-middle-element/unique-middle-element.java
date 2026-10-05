@@ -6,10 +6,9 @@ class Solution {
         }
         int mid=nums.length/2;
         int m=nums[mid];
-        for(int key:map.keySet()){
-            if(key==m && map.get(key)==1){
+            if(map.get(m)==1){
                 return true;
-            }
+            
         }
         return false;
 
